@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+
+    <changeSet id="1" author="oleg">
+        <createTable tableName="owner">
+        <column type="bigint" name="id" autoIncrement="true">
+            <constraints primaryKey="true"/>
+        </column>
+
+        <column name="firstName" type="varchar(255)">
+            <constraints unique="true" nullable="false"/>
+        </column>
+        <column name="lastName" type="varchar(255)">
+            <constraints unique="true" nullable="false"/>
+        </column>
+        <column name="dateOfBirth" type="date">
+            <constraints nullable="false"/>
+        </column>
+    </createTable>
+
+        <createTable tableName="dog">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true"/>
+            </column>
+
+            <column name="nickname" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="breed" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="dateOfBirth" type="date">
+                <constraints nullable="false"/>
+            </column>
+            <column name="registrationDate" type="date">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="owner_id" type="bigint">
+                <constraints referencedTableName="owner"
+                             referencedColumnNames="id"
+                             foreignKeyName="DOG_OWNER_ID_OWNER_ID"/>
+            </column>
+        </createTable>
+
+
+    </changeSet>
+</databaseChangeLog>

@@ -6,8 +6,9 @@ import com.telran.dogsowner.repository.DogRepository;
 import com.telran.dogsowner.service.DogService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
-
+@Service
 public class DogServiceImpl implements DogService {
     @Autowired
     DogRepository dogRepository;
@@ -18,7 +19,6 @@ public class DogServiceImpl implements DogService {
                 .id(dogDTO.getId())
                 .nickname(dogDTO.getNickname())
                 .breed(dogDTO.getBreed())
-                //  .owner(dogDTO.getOwner())
                 .registrationDate(dogDTO.getRegistrationDate())
                 .build();
 

@@ -2,13 +2,14 @@ package com.telran.dogsowner.controller;
 
 import com.telran.dogsowner.dto.OwnerDTO;
 import com.telran.dogsowner.service.OwnerService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 public class OwnerController {
-
+     @Autowired
     OwnerService ownerService;
 
     @PostMapping("/owners")

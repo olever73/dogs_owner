@@ -1,20 +1,21 @@
 package com.telran.dogsowner.service;
 
 
-import com.telran.dogsowner.dto.OwnerDTO;
+import com.telran.dogsowner.dto.OwnerRequestDTO;
+import com.telran.dogsowner.dto.OwnerResponseDTO;
 
 import java.util.List;
 
 public interface OwnerService {
 
 
-    void createOwner(OwnerDTO ownerDTO);
+    void createOwner(OwnerRequestDTO request);
 
+    OwnerResponseDTO getOwnerById(long id);
 
-    List<OwnerDTO> getAllOwners();
+    List<OwnerResponseDTO> getAllOwners();
 
-
-    OwnerDTO getOwnerById(Long id);
+    void dogToggle(long id, long dog_id);
 
 
 

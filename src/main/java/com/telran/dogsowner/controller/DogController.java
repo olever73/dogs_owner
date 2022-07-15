@@ -1,28 +1,36 @@
 package com.telran.dogsowner.controller;
 
-import com.telran.dogsowner.dto.DogDTO;
+import com.telran.dogsowner.dto.DogRequestDTO;
+import com.telran.dogsowner.dto.DogResponseDTO;
 import com.telran.dogsowner.service.DogService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 public class DogController {
+
    @Autowired
-   DogService dogService;
+   private DogService dogService;
 
    @PostMapping("/dogs")
-   public void createDog(@RequestBody DogDTO dogDTO) {
-      dogService.createDog(dogDTO);
+   public void createDog(@RequestBody DogRequestDTO request) {
+      dogService.createDog(request);
    }
 
-   @PutMapping("/dogs")
-   public void edit(@RequestBody DogDTO dogDTO) {
-      dogService.edit(dogDTO);
+   @GetMapping("/dogs")
+   public List<DogResponseDTO> getAllDogs() {
+      return dogService.getAllDogs();
    }
 
    @GetMapping("/dogs/{id}")
-   public DogDTO getDogById(@PathVariable("id") Long id) {
+   public DogResponseDTO getDogById(@PathVariable("id") long id) {
       return dogService.getDogById(id);
    }
 
+   @GetMapping("/dogs/unregistered")
+   public List<DogResponseDTO> getAllUnregisteredDogs() {
+      return dogService.getAllUnregisteredDogs();
+   }
 }

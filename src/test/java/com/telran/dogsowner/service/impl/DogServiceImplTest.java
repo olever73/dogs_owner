@@ -9,6 +9,7 @@ import com.telran.dogsowner.repository.OwnerRepository;
 import liquibase.pro.packaged.L;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.ArgumentMatchers;
@@ -117,19 +118,74 @@ class DogServiceImplTest {
         Assertions.assertNotNull(response.getOwnerId());
 
 
-
-
-
-
-
-
-
-
     }
 
 
+    @Nested
+    @DisplayName("getAll method tests")
+    class GetAllMethodTest {
+
+        @Test
+        @DisplayName("shouldReturnEmptyListWhenThereAreNoDogs")
+        public void shouldReturnEmptyList() {
+
+            var expectedSize = 0;
 
 
+            Mockito
+                    .when(dogRepository.findAll())
+                    .thenReturn(List.of());
+            Mockito
+                    .verify(dogRepository,
+                            Mockito.times(0))
+                    .findAll((Example<Dog>) ArgumentMatchers.any());
+
+
+            var response = dogServiceImpl.getAllDogs();
+            Assertions.assertEquals(expectedSize, response.size());
+        }
+    }
+/*
+    @Test
+    @DisplayName("shouldReturnEmptyListWhenThereAreNoDogs  ")
+    public void AllDogs() {
+       int expectedResponseSize=3;
+
+
+        List<Dog> dogs = List.of(
+                Dog.builder().id(103L).nickName("Kaiser").breed(" white")
+                        .dateOfBirth(LocalDate.ofEpochDay(12-01-2020)).build(),
+                Dog.builder().id(102L).nickName("Alma").breed(" white")
+                        .dateOfBirth(LocalDate.ofEpochDay(12-01-2022)).build(),
+                Dog.builder().id(101L).nickName("Don").breed(" black")
+                        .dateOfBirth(LocalDate.ofEpochDay(10-12-2021)) .build()
+
+        );
+
+        Mockito
+                . when( dogRepository.findAll())
+                .thenReturn(dogs);
+
+        var response = dogServiceImpl. getAllDogs();
+
+        Assertions.assertEquals(expectedResponseSize, response.size());
+
+
+    }
+*/
+
+    @Test
+    void getAllUnregisteredDogs() {
+        List<Dog> dogs = List.of(
+            Dog.builder().id(103L).nickName("Kaiser").breed(" white")
+                    .dateOfBirth(LocalDate.ofEpochDay(12-01-2020)).build(),
+            Dog.builder().id(102L).nickName("Alma").breed(" white")
+                    .dateOfBirth(LocalDate.ofEpochDay(12-01-2022)).build(),
+            Dog.builder().id(101L).nickName("Don").breed(" black")
+                    .dateOfBirth(LocalDate.ofEpochDay(10-12-2021)) .build()
+
+    );
+    }
 
 
 }
